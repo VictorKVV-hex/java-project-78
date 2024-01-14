@@ -18,7 +18,7 @@ public class TestStringShema {
         schema = v.string();
     }
     @Test
-    public void RequiredTest() {
+    public void requiredTest() {
         assertTrue(schema.isValid(""));
         assertTrue(schema.isValid(INTEGER_DIGIT));
         assertTrue(schema.isValid(null));
