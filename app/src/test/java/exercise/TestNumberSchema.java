@@ -12,7 +12,7 @@ public class TestNumberSchema {
     private NumberSchema schema;
     private static final int DIGIT_MINUS_TEN = -10;
     private static final int DIGIT_TEN = 10;
-    private static final int DIGIT_ELEVEN = 10;
+    private static final int DIGIT_ELEVEN = 11;
     private static final int DIGIT_FIVE = 5;
     @BeforeEach
     public void beforeEach() {
@@ -30,7 +30,6 @@ public class TestNumberSchema {
         assertFalse(schema.isValid("5"));
         assertTrue(schema.isValid(DIGIT_TEN));
         assertFalse(schema.isValid(DIGIT_MINUS_TEN));
-        
         schema.range(DIGIT_FIVE, DIGIT_TEN);
 
         assertTrue(schema.isValid(DIGIT_FIVE));
