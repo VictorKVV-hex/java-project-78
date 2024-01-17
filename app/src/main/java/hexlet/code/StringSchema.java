@@ -11,9 +11,9 @@ import java.util.List;
 
 @Getter
 @Setter
-public class StringSchema {
+public class StringSchema extends BaseSchema{
 
-    private List<Predicate<Object>> conditions = new ArrayList<>();
+//    private List<Predicate<Object>> conditions = new ArrayList<>();
 
     public StringSchema required() {
 /*        Predicate<Integer> lesserthan = i -> (i < 18);// Creating predicate
@@ -32,13 +32,13 @@ public class StringSchema {
         conditions.add(strCondition);
         return this;
     }
-    public boolean isValid(Object data) {
+/*    public boolean isValid(Object data) {
         for (Predicate<Object> condition : conditions) {
             if (!condition.test(data)) {
                 return false;
             }
         }
         return true;
-    }
+    }*/
 
 }
