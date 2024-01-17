@@ -1,10 +1,8 @@
 package hexlet.code;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Predicate;
 
-public class NumberSchema extends BaseSchema{
+public class NumberSchema extends BaseSchema {
 
 //    private List<Predicate<Object>> conditions = new ArrayList<>();
 

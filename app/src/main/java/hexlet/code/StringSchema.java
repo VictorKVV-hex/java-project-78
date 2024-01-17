@@ -2,16 +2,12 @@ package hexlet.code;
 
 import lombok.Getter;
 import lombok.Setter;
-
-
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Predicate;
-import java.util.List;
 
 @Getter
 @Setter
-public class StringSchema extends BaseSchema{
+public class StringSchema extends BaseSchema {
 
 //    private List<Predicate<Object>> conditions = new ArrayList<>();
 
