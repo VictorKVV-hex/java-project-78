@@ -1,7 +1,6 @@
 package exercise;
 
 import hexlet.code.MapSchema;
-import hexlet.code.NumberSchema;
 import hexlet.code.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
