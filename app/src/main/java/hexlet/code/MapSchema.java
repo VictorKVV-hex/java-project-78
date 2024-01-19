@@ -17,4 +17,8 @@ public class MapSchema extends BaseSchema {
         conditions.add(strCondition);
         return this;
     }
+    public MapSchema shape(Map<String, BaseSchema> map) {
+
+        return this;
+    }
 }
