@@ -1,6 +1,6 @@
 package exercise;
 
-import hexlet.code.StringSchema;
+import hexlet.code.schemas.StringSchema;
 import hexlet.code.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
