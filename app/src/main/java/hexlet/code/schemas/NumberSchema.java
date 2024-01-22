@@ -6,19 +6,19 @@ public class NumberSchema extends BaseSchema {
 
 //    private List<Predicate<Object>> conditions = new ArrayList<>();
 
-    public NumberSchema required() {
+    public final NumberSchema required() {
         Predicate<Object> numberCondition = n -> (n instanceof Integer);
-        conditions.add(numberCondition);
+        addCondition(numberCondition);
         return this;
     }
-    public NumberSchema positive() {
+    public final NumberSchema positive() {
         Predicate<Object> numberCondition = n -> (n instanceof Integer i && i > 0 || n == null);
-        conditions.add(numberCondition);
+        addCondition(numberCondition);
         return this;
     }
-    public NumberSchema range(Integer min, Integer max) {
+    public final NumberSchema range(Integer min, Integer max) {
         Predicate<Object> numberCondition = n ->  min <= (Integer) n && (Integer) n <= max;
-        conditions.add(numberCondition);
+        addCondition(numberCondition);
         return this;
     }
 /*    public boolean isValid(Object data) {

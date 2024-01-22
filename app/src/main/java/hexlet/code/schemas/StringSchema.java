@@ -11,21 +11,21 @@ public class StringSchema extends BaseSchema {
 
 //    private List<Predicate<Object>> conditions = new ArrayList<>();
 
-    public StringSchema required() {
+    public final StringSchema required() {
 /*        Predicate<Integer> lesserthan = i -> (i < 18);// Creating predicate
         System.out.println(lesserthan.test(10));// Calling Predicate method*/
         Predicate<Object> strCondition = s -> !(Objects.equals(s, "") || s == null) && s instanceof String;
-        conditions.add(strCondition);
+        addCondition(strCondition);
         return this;
     }
-    public StringSchema minLength(int length) {
+    public final StringSchema minLength(int length) {
         Predicate<Object> strCondition = s -> ((String) s).length() > length;
-        conditions.add(strCondition);
+        addCondition(strCondition);
         return this;
     }
-    public StringSchema contains(String content) {
+    public final StringSchema contains(String content) {
         Predicate<Object> strCondition = s -> ((String) s).contains(content);
-        conditions.add(strCondition);
+        addCondition(strCondition);
         return this;
     }
 /*    public boolean isValid(Object data) {

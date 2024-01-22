@@ -5,19 +5,20 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public class MapSchema extends BaseSchema {
-    public MapSchema required() {
+    public final MapSchema required() {
 //        Predicate<Object> strCondition =
 //        m -> m instanceof Map && ((Map<?, ?>) m).keySet().stream().anyMatch(Objects::isNull);
         Predicate<Object> strCondition = m -> m instanceof Map;
-        conditions.add(strCondition);
+//        conditions.add(strCondition);
+        addCondition(strCondition);
         return this;
     }
-    public MapSchema sizeof(Integer size) {
+    public final MapSchema sizeof(Integer size) {
         Predicate<Object> strCondition = m -> ((Map<?, ?>) m).size() == size;
-        conditions.add(strCondition);
+        addCondition(strCondition);
         return this;
     }
-    public MapSchema shape(Map<String, BaseSchema> schemas) {
+    public final MapSchema shape(Map<String, BaseSchema> schemas) {
 
         for (Map.Entry<String, BaseSchema> entry : schemas.entrySet()) {
             // entry === "name", v.string().required()
@@ -30,7 +31,7 @@ public class MapSchema extends BaseSchema {
                                                     };*/
             Predicate<Object> strCondition = o -> shema.isValid(((Map) o).get(key));
 //            Predicate<Object> strCondition = o -> entry.getValue().isValid(((Map<?, ?>) o).get(key));
-            conditions.add(strCondition);
+            addCondition(strCondition);
         }
         return this;
     }
