@@ -9,7 +9,7 @@ public class MapSchema extends BaseSchema {
 //        Predicate<Object> strCondition =
 //        m -> m instanceof Map && ((Map<?, ?>) m).keySet().stream().anyMatch(Objects::isNull);
         Predicate<Object> strCondition = m -> m instanceof Map;
-//        conditions.add(strCondition);
+
         addCondition(strCondition);
         return this;
     }

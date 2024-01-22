@@ -28,13 +28,5 @@ public class StringSchema extends BaseSchema {
         addCondition(strCondition);
         return this;
     }
-/*    public boolean isValid(Object data) {
-        for (Predicate<Object> condition : conditions) {
-            if (!condition.test(data)) {
-                return false;
-            }
-        }
-        return true;
-    }*/
 
 }
