@@ -24,10 +24,11 @@ public class MapSchema extends BaseSchema {
             String key = entry.getKey(); // name
             BaseSchema shema = entry.getValue(); // v.string().required()
 
-            Predicate<Object> strCondition = o -> {Object obj = ((Map) o).get(key);
+/*            Predicate<Object> strCondition = o -> {
+                                                    Object obj = ((Map) o).get(key);
                                                     return shema.isValid(obj);
-                                                    };
-//            Predicate<Object> strCondition = o -> shema.isValid(((Map) o).get(key));
+                                                    };*/
+            Predicate<Object> strCondition = o -> shema.isValid(((Map) o).get(key));
 //            Predicate<Object> strCondition = o -> entry.getValue().isValid(((Map<?, ?>) o).get(key));
             conditions.add(strCondition);
         }
