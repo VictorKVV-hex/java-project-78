@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestNumberSchema {
+public final class TestNumberSchema {
     private NumberSchema schema;
     private static final int DIGIT_MINUS_TEN = -10;
     private static final int DIGIT_TEN = 10;

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestStringShema {
+public final class TestStringShema {
     private StringSchema schema;
     private static final int INTEGER_DIGIT = 5;
 
