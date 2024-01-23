@@ -9,8 +9,6 @@ import java.util.function.Predicate;
 @Setter
 public class StringSchema extends BaseSchema {
 
-//    private List<Predicate<Object>> conditions = new ArrayList<>();
-
     public final StringSchema required() {
 /*        Predicate<Integer> lesserthan = i -> (i < 18);// Creating predicate
         System.out.println(lesserthan.test(10));// Calling Predicate method*/
