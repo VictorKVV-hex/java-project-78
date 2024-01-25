@@ -40,15 +40,13 @@ public final class TestMapSchema {
     }
     @Test
     public void shapeTest() {
-// shape позволяет описывать валидацию для значений каждого ключа объекта Map
-// Создаем набор схем для проверки каждого ключа проверяемого объекта
-// Для значения каждого ключа - своя схема
+
         Map<String, BaseSchema> schemas = new HashMap<>();
         schemas.put("name", v.string().required());
         schemas.put("age", v.number().positive());
-// Настраиваем схему `MapSchema`. Передаем созданный набор схем в метод shape()
+
         schema.shape(schemas);
-// Проверяем объекты
+
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
         human1.put("age", 100);

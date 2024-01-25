@@ -6,8 +6,6 @@ import java.util.function.Predicate;
 
 public class MapSchema extends BaseSchema {
     public final MapSchema required() {
-//        Predicate<Object> strCondition =
-//        m -> m instanceof Map && ((Map<?, ?>) m).keySet().stream().anyMatch(Objects::isNull);
         Predicate<Object> strCondition = m -> m instanceof Map;
 
         addCondition(strCondition);
@@ -24,13 +22,7 @@ public class MapSchema extends BaseSchema {
             // entry === "name", v.string().required()
             String key = entry.getKey(); // name
             BaseSchema shema = entry.getValue(); // v.string().required()
-
-/*            Predicate<Object> strCondition = o -> {
-                                                    Object obj = ((Map) o).get(key);
-                                                    return shema.isValid(obj);
-                                                    };*/
             Predicate<Object> strCondition = o -> shema.isValid(((Map) o).get(key));
-//            Predicate<Object> strCondition = o -> entry.getValue().isValid(((Map<?, ?>) o).get(key));
             addCondition(strCondition);
         }
         return this;
