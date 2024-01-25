@@ -19,9 +19,8 @@ public class MapSchema extends BaseSchema {
     public final MapSchema shape(Map<String, BaseSchema> schemas) {
 
         for (Map.Entry<String, BaseSchema> entry : schemas.entrySet()) {
-            // entry === "name", v.string().required()
-            String key = entry.getKey(); // name
-            BaseSchema shema = entry.getValue(); // v.string().required()
+            String key = entry.getKey();
+            BaseSchema shema = entry.getValue();
             Predicate<Object> strCondition = o -> shema.isValid(((Map) o).get(key));
             addCondition(strCondition);
         }
