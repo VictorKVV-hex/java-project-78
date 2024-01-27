@@ -50,22 +50,22 @@ public final class TestMapSchema {
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
         human1.put("age", 100);
-        assertTrue(schema.isValid(human1)); // true
+        assertTrue(schema.isValid(human1));
 
         Map<String, Object> human2 = new HashMap<>();
         human2.put("name", "Maya");
         human2.put("age", null);
-        assertTrue(schema.isValid(human2)); // true
+        assertTrue(schema.isValid(human2));
 
         Map<String, Object> human3 = new HashMap<>();
         human3.put("name", "");
         human3.put("age", null);
-        assertFalse(schema.isValid(human3)); // false
+        assertFalse(schema.isValid(human3));
 
         Map<String, Object> human4 = new HashMap<>();
         human4.put("name", "Valya");
         human4.put("age", -5);
-        assertFalse(schema.isValid(human4)); // false
+        assertFalse(schema.isValid(human4));
     }
     @Test
     public void shapeTest2() {
@@ -76,10 +76,10 @@ public final class TestMapSchema {
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
         human1.put("age", 100);
-        assertTrue(schema.isValid(human1)); // true
+        assertTrue(schema.isValid(human1));
         Map<String, Object> human2 = new HashMap<>();
         human1.put("name", "Nic");
         human1.put("age", 100);
-        assertFalse(schema.isValid(human2)); // false
+        assertFalse(schema.isValid(human2));
     }
 }
