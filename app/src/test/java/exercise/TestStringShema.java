@@ -33,6 +33,8 @@ public final class TestStringShema {
     public void minLengthTest() {
         assertTrue(schema.minLength(INTEGER_DIGIT).isValid("whatthe"));
         assertFalse(schema.minLength(INTEGER_DIGIT).isValid("wha"));
+        schema.contains("tt");
+        assertTrue(schema.minLength(INTEGER_DIGIT).isValid("whatthe"));
     }
     @Test
     public void containsTest() {
