@@ -35,5 +35,6 @@ public final class TestNumberSchema {
         assertTrue(schema.isValid(DIGIT_FIVE));
         assertFalse(schema.isValid(DIGIT_ELEVEN));
         assertTrue(schema.isValid(DIGIT_TEN));
+        assertFalse(schema.isValid(DIGIT_MINUS_TEN));
     }
 }
