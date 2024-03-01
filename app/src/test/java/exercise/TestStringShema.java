@@ -9,36 +9,42 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class TestStringShema {
-    private StringSchema schema;
-    private static final int INTEGER_DIGIT = 5;
-
-    @BeforeEach
-    public void beforeEach() {
-        Validator v = new Validator();
-        schema = v.string();
-    }
+    private static final int MIN_LENGTH = 3;
+    private static final int MAX_LENGTH = 100;
+    private static final int IN_RANGE = 25;
+    private static final int NEGATIVE = -5;
+    private static final int MIN = 18;
+    private static final int MAX = 35;
     @Test
-    public void requiredTest() {
+    public void testValidStringSchema() {
+        StringSchema schema = Validator.string();
+        boolean actual;
+        actual = schema.isValid("");
+        assertTrue(actual);
+        actual = schema.isValid(null);
+        assertTrue(actual);
+
         assertTrue(schema.isValid(""));
-        assertTrue(schema.isValid(INTEGER_DIGIT));
-        assertTrue(schema.isValid(null));
-        assertTrue(schema.isValid("String"));
+
         schema.required();
-        assertFalse(schema.isValid(null));
-        assertFalse(schema.isValid(INTEGER_DIGIT));
         assertTrue(schema.isValid("what does the fox say"));
         assertTrue(schema.isValid("hexlet"));
-    }
-    @Test
-    public void minLengthTest() {
-        assertTrue(schema.minLength(INTEGER_DIGIT).isValid("whatthe"));
-        assertFalse(schema.minLength(INTEGER_DIGIT).isValid("wha"));
-        schema.contains("tt");
-        assertTrue(schema.minLength(INTEGER_DIGIT).isValid("whatthe"));
-    }
-    @Test
-    public void containsTest() {
-        assertTrue(schema.contains("what").isValid("what does the fox say"));
-        assertFalse(schema.contains("???").isValid("what does the fox say"));
+        assertFalse(schema.isValid(""));
+        assertFalse(schema.isValid(null));
+
+        schema.required().contains("ab").minLength(5);
+        actual = schema.required().contains("ab").minLength(5).isValid("abcdef");
+        assertTrue(actual);
+        actual = schema.required().isValid(null);
+        assertFalse(actual);
+        actual = schema.required().isValid("");
+        assertFalse(actual);
+        actual = schema.isValid(String.valueOf(5));
+        assertFalse(actual);
+        actual = schema.minLength(6).isValid("abcdefgh");
+        assertTrue(actual);
+        actual = schema.minLength(10).isValid("ab");
+        assertFalse(actual);
+
     }
 }

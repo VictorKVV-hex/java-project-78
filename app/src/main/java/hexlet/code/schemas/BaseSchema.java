@@ -1,32 +1,29 @@
 package hexlet.code.schemas;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
-/**
- * Абстрактный класс, хранит "List<conditions>".
- * + Общий для наследователей метод "isValid", проверяющий в цикле все условия.
- */
-public abstract class BaseSchema {
-    private List<Predicate<Object>> conditions = new ArrayList<>();
 
-    public final void addCondition(Predicate<Object> condition) {
-        conditions.add(condition);
+public abstract class BaseSchema<T> {
+    // protected final List<Predicate<T>> conditions;
+    protected Map<String, Predicate<T>> checks = new LinkedHashMap<>();
+    protected boolean required = false;
+    protected final void addCheck(String name, Predicate<T> validate) {
+        checks.put(name, validate);
     }
-
-    /**
-     * Метод "isValid", проверяет в цикле все условия(предикаты) на "true".
-     * @param data - Object - String, Integer or Map
-     * @return возвращает "true", если все условия выполнились, "false", если хоть одно не выполнилось.
-     */
-    public final boolean isValid(Object data) {
-        for (Predicate<Object> condition : conditions) {
-            if (!condition.test(data)) {
+    public final boolean isValid(T value) {
+        if (!required) {
+            var validate = checks.get("required");
+            if (!validate.test(value)) {
+                return true;
+            }
+        }
+        for (var validate : checks.values()) {
+            if (!validate.test(value)) {
                 return false;
             }
         }
         return true;
     }
-
 }

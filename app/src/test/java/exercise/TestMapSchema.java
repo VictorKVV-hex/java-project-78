@@ -13,49 +13,57 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class TestMapSchema {
-    private MapSchema schema;
-    private Validator v;
+    private static final int MIN_LENGTH = 3;
+    private static final int MAX_LENGTH = 100;
+    private static final int IN_RANGE = 25;
+    private static final int NEGATIVE = -5;
+    private static final int MIN = 18;
+    private static final int MAX = 35;
 
-    @BeforeEach
-    public void beforeEach() {
-        v = new Validator();
-        schema = v.map();
-    }
     @Test
-    public void requiredTest() {
-        assertTrue(schema.isValid(null));
-
+    public void testValidMapSchema() {
+        MapSchema schema = Validator.map();
+        boolean actual;
+        actual = schema.isValid(null);
+        assertTrue(actual);
         schema.required();
-
-        assertFalse(schema.isValid(null));
-        assertTrue(schema.isValid(new HashMap()));
+        actual = schema.isValid(null);
+        assertFalse(actual);
+        actual = schema.isValid(new HashMap<>());
+        assertTrue(actual);
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
-        assertTrue(schema.isValid(data));
-
+        actual = schema.isValid(data);
+        assertTrue(actual);
         schema.sizeof(2);
-        assertFalse(schema.isValid(data));
         data.put("key2", "value2");
-        assertTrue(schema.isValid(data));
-    }
-    @Test
-    public void shapeTest() {
+        actual = schema.isValid(data);
+        assertTrue(actual);
+        schema.sizeof(1);
+        actual = schema.isValid(data);
+        assertFalse(actual);
 
-        Map<String, BaseSchema> schemas = new HashMap<>();
-        schemas.put("name", v.string().required());
-        schemas.put("age", v.number().positive());
+    }
+
+
+    @Test
+    public <T> void testValidMapShapeSchema() {
+        MapSchema schema = Validator.map();
+        Map<String, BaseSchema<T>> schemas = new HashMap<>();
+        schemas.put("name", (BaseSchema<T>) Validator.string().required());
+        schemas.put("age", (BaseSchema<T>) Validator.number().required().range(MIN, MAX));
 
         schema.shape(schemas);
 
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
         human1.put("age", 100);
-        assertTrue(schema.isValid(human1));
+        assertFalse(schema.isValid(human1));
 
         Map<String, Object> human2 = new HashMap<>();
         human2.put("name", "Maya");
         human2.put("age", null);
-        assertTrue(schema.isValid(human2));
+        assertFalse(schema.isValid(human2));
 
         Map<String, Object> human3 = new HashMap<>();
         human3.put("name", "");
@@ -64,22 +72,12 @@ public final class TestMapSchema {
 
         Map<String, Object> human4 = new HashMap<>();
         human4.put("name", "Valya");
-        human4.put("age", -5);
+        human4.put("age", NEGATIVE);
         assertFalse(schema.isValid(human4));
-    }
-    @Test
-    public void shapeTest2() {
-        Map<String, BaseSchema> schemas = new HashMap<>();
-        schemas.put("name", v.string().required().minLength(4).contains("l"));
-        schemas.put("age", v.number().positive());
-        schema.shape(schemas);
-        Map<String, Object> human1 = new HashMap<>();
-        human1.put("name", "Kolya");
-        human1.put("age", 100);
-        assertTrue(schema.isValid(human1));
-        Map<String, Object> human2 = new HashMap<>();
-        human1.put("name", "Nic");
-        human1.put("age", 100);
-        assertFalse(schema.isValid(human2));
+
+        Map<String, Object> human5 = new HashMap<>();
+        human5.put("name", " ");
+        human5.put("age", IN_RANGE);
+        assertTrue(schema.isValid(human5));
     }
 }
